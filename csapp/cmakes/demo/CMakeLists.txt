@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.23)
+project(demo)
+aux_source_directory(. DEMO_SRC)
+add_subdirectory(math)
+add_executable(demo ${DEMO_SRC})
+target_link_libraries(demo fun)
