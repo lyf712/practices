@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.23)
+project(runoob)
+aux_source_directory(. RUNOOB_SRC)
+add_subdirectory(lang)
+add_executable(runoob ${RUNOOB_SRC})
+target_link_libraries(runoob lang)
