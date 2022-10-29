@@ -1,13 +1,16 @@
 //
 // Created by LYF on 2022/10/29.
 //
-
+#include "vector"
 #include "TypeCastDemo.h"
 #include "iostream"
 #include "../common/rc.h"
+
 void TypeCastDemo::test1(){
     std::cout<<"test 1 ok!"<<std::endl;
 }
+
+
 //https://blog.csdn.net/qq_42944019/article/details/126512081
 void TypeCastDemo::test_cast() {
     char* chars="hello";
@@ -111,6 +114,27 @@ void test_char_to_float(){
     std::cout<<float_val<<std::endl;
 }
 
+void float_to_char(float &float_val,char* chars)
+{
+    int int_val = (int)float_val;
+    char* ptr = chars;
+    std::vector<char> vector;
+
+    while (int_val>0){
+        vector.push_back((char) (int_val%10));
+        int_val/=10;
+    }
+    while(!vector.empty()){
+          ptr = vector.data();
+          vector.pop_back();
+          ptr++;
+//        *ptr = vector.begin().operator*();
+//        ptr++;
+//        vector.pop_back();
+    }
+    chars = ptr;
+    //return RC::SUCCESS;
+}
 
 // int -> float
 // int -> char
@@ -118,4 +142,37 @@ void test_char_to_float(){
 int main() {
     // test_char_to_int();
     // test_char_to_float();
+//    std::string str = "hello!string";
+//    const char *chars = str.c_str();// const常量？
+//    std::cout<<chars;
+//    std::cout<<RC::SUCCESS<<std::endl;
+
+    //    char* str = static_cast<char *>(malloc(10 * sizeof(char *)));
+//    int year=2002,month=10,day=10;
+//    str = "2010-10-07";
+//    sscanf(str,"%d-%d-%d",year,month,day);
+//    printf("%s",str);
+//    printf("%d,%d,%d",year,month,day);
+
+//      float float_val = 37.1;
+//      char* chars0= nullptr;
+//      float_to_char(float_val,chars0);
+//      //std::cout<<chars0<<"ok";
+//       std::cout<<"ok"<<chars0;
+//    char* str;
+//    sprintf(str,"%d",1);
+//    std::cout<<str;
+
+    int a=1111;
+    char *str = nullptr; //[10];
+    str = static_cast<char *>(malloc(4 * sizeof(char)));
+    sprintf(str,"%d",a);
+    // 把整数a转换为字符串，存放在str中
+    printf("str=%s\n",str);
+
+    float b = 110.1;
+    sprintf(str,"%f",b);
+    printf("str=%s\n",str);
+
+    // 输出str=1111
 }
