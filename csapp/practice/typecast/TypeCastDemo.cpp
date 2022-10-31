@@ -1,6 +1,8 @@
 //
 // Created by LYF on 2022/10/29.
 //
+#include <sstream>
+#include <cmath>
 #include "vector"
 #include "TypeCastDemo.h"
 #include "iostream"
@@ -114,30 +116,42 @@ void test_char_to_float(){
     std::cout<<float_val<<std::endl;
 }
 
-void float_to_char(float &float_val,char* chars)
-{
-    int int_val = (int)float_val;
-    char* ptr = chars;
-    std::vector<char> vector;
-
-    while (int_val>0){
-        vector.push_back((char) (int_val%10));
-        int_val/=10;
-    }
-    while(!vector.empty()){
-          ptr = vector.data();
-          vector.pop_back();
-          ptr++;
-//        *ptr = vector.begin().operator*();
-//        ptr++;
-//        vector.pop_back();
-    }
-    chars = ptr;
-    //return RC::SUCCESS;
-}
+//void float_to_char(float &float_val,char* chars)
+//{
+//    int int_val = (int)float_val;
+//    char* ptr = chars;
+//    std::vector<char> vector;
+//
+//    while (int_val>0){
+//        vector.push_back((char) (int_val%10));
+//        int_val/=10;
+//    }
+//    while(!vector.empty()){
+//          ptr = vector.data();
+//          vector.pop_back();
+//          ptr++;
+////        *ptr = vector.begin().operator*();
+////        ptr++;
+////        vector.pop_back();
+//    }
+//    chars = ptr;
+//    //return RC::SUCCESS;
+//}
 
 // int -> float
 // int -> char
+
+char* float_to_char(float &float_val, char* chars) {
+    //int int_val = (int)float_val;
+    //sprintf(chars,"%d",int_val);
+    std::stringstream ss;
+    ss << float_val;
+    chars = (char*) ss.str().c_str();
+    //std::cout<<chars<<";"<<ss.str().c_str();
+    //return RC::SUCCESS;
+    return const_cast<char *>(ss.str().c_str());
+}
+
 
 int main() {
     // test_char_to_int();
@@ -163,16 +177,53 @@ int main() {
 //    sprintf(str,"%d",1);
 //    std::cout<<str;
 
-    int a=1111;
-    char *str = nullptr; //[10];
-    str = static_cast<char *>(malloc(4 * sizeof(char)));
-    sprintf(str,"%d",a);
-    // 把整数a转换为字符串，存放在str中
-    printf("str=%s\n",str);
+//    int a=1111;
+//    char *str = nullptr; //[10];
+//    str = static_cast<char *>(malloc(4 * sizeof(char)));
+//    sprintf(str,"%d",a);
+//    // 把整数a转换为字符串，存放在str中
+//    printf("str=%s\n",str);
+//
+//    float b = 110.1;
+//    sprintf(str,"%f",b);
+//    printf("str=%s\n",str);
 
-    float b = 110.1;
-    sprintf(str,"%f",b);
-    printf("str=%s\n",str);
+//    // 输出str=1111
+//    float c = 1.1;
+//    size_t MAX_NUM = 20;
+//    char *chars = float_to_char(c,NULL);//static_cast<char *>(malloc(2 * sizeof(char)));
+//    //float_to_char(c,chars);
+//    std::cout<<chars;
+//    std::stringstream ss;
+//    ss << c;
+//    std::cout<<ss.str().c_str();
 
-    // 输出str=1111
+
+//      void* value;
+//      float* float_val;
+//      float_val = (float*) value;
+
+
+//      float a=0.5;
+//      std::cout<<(int)round(a);
+    char* chars = (char*) "N23";
+    int len = 0;
+    int attr_len = 4;
+    std::cout<<chars<<std::endl;
+    char* data = static_cast<char *>(malloc(attr_len * sizeof(char)));//reinterpret_cast<char *>('1321');
+    data =(char*) "abcd";
+    //data[0]='1';
+    std::cout<<data;
+
+    for (char p = *chars; p; p = *++chars){
+//        if(len>=attr_len){
+//            realloc(data, sizeof(char));
+//        }
+       // *(char*)(data+len) = p; //value->data
+        data[len] = p;
+        len++;
+    }
+    std::cout<<"ok";
+    std::cout<<data;
+
 }
