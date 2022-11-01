@@ -17,6 +17,8 @@ void PtrAndArrDemo::chars_str()
 }
 
 int main(){
-    PtrAndArrDemo ptrAndArrDemo = *new PtrAndArrDemo();
-    ptrAndArrDemo.chars_str();
+//    PtrAndArrDemo ptrAndArrDemo = *new PtrAndArrDemo();
+//    ptrAndArrDemo.chars_str();
+     int32_t val = 20221021;
+     std::cout<<(val<<4)<<":"<<(val<<2);
 }
