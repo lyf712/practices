@@ -4,6 +4,7 @@
 
 #include <cstring>
 #include <regex>
+#include <set>
 #include "StringDemo.h"
 #include "iostream"
 int ignore_case_strcmp(const char* s1,const char* s2)
@@ -79,6 +80,11 @@ int regex_match(){
     }
 }
 
+struct Value{
+    int type;
+    char* data;
+};
+
 int main(){
 //    std::cout<<"enter string"<<std::endl;
 //    char* str1 = "NAME";
@@ -86,5 +92,19 @@ int main(){
 //    std::cout<<str1<<","<<str2<<";"<<ignore_case_strcmp(str1,str2)<<std::endl;
 //    std::cout<<str1<<","<<str2<<";";
     regex_match();
+
+    std::set<const char*> sets ;
+    const char* ch1 = "1";
+    const char* ch2 = static_cast<const char *>(malloc(sizeof(char)));
+    ch2 = "2";
+    Value value1;
+    value1.data = "1";
+    value1.type= 1;
+    Value value2;
+    value2.data = "1";
+    value2.type=2;
+    sets.insert(value1.data);
+    sets.insert(value2.data);
+    std::cout<<sets.size()<<sets.count("1")<<"::"<<sets.count("2");
 
 }
